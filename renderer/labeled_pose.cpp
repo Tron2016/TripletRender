@@ -8,10 +8,11 @@ LabeledPose::LabeledPose() {
 
 }
 
-static LabeledPose* loadFromFilename(const std::string &filename, const std::string &objName, const std::string &className) {
+LabeledPose* loadFromFilename(const std::string &filename, const std::string &objName, const std::string &className) {
 	LabeledPose* ptr = new LabeledPose();
+	return ptr;
 }
-static std::vector<std::string> tokenize(const std::string& str, char delimiter) {
+std::vector<std::string> tokenize(const std::string& str, char delimiter) {
 	std::vector<std::string> tokens;
 	return tokens;
 }

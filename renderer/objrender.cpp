@@ -1,49 +1,75 @@
-#include "renderer.h"
 #include <sstream>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <boost/filesystem.hpp>
-#include "util.h"
 #include <time.h>
 #include "RenderEngine.h"
-std::vector<std::pair<double, double> > getSpherePoints(int numPoints)
+std::vector<std::vector<double> > getSpherePoints(int numPoints)
 {
-	std::vector<std::pair<double, double> > points;
-	int rnd = 1;
-	double offset = 2.0 / numPoints;
-	//why not use 2
-	double increment = osg::PI * (3 - std::sqrt(3));
-	for (int i = 0; i < numPoints; i++)
+	std::vector<std::vector<double> > points;
+	double direction[3];
+	int n = sqrt((numPoints - 2) / 4);
+	direction[0] = 0;
+	direction[3] = 0;
+	double azimuthal= 0.5*osg::PI/n;
+	for (int i = -n; i < n + 1; i++)
 	{
-		double y = ((i * offset) - 1) + (offset / 2);
-		double r = std::sqrt(1 - std::pow(y , 2));
-		double phi = ((i + rnd) % numPoints) * increment;
-		double x = std::cos(phi) * r;
-		double z = std::sin(phi) * r;
-		double azimuth = osg::RadiansToDegrees(std::atan2(y, x));
-		double elevation = osg::RadiansToDegrees(std::asin(z));
-		points.push_back(std::make_pair(azimuth, elevation));
+		direction[1] = 0;
+		double b = (n - std::abs(i)) * 4;
+		double s = b == 0 ? 1 : b;
+		double  elevation = 2 * osg::PI / s;
+		for (int j = 0; j < s; j++)
+		{
+			points.push_back(std::vector<double>(direction, direction + 3));
+			direction[1] += osg::RadiansToDegrees(elevation);
+		}
+		direction[0] += osg::RadiansToDegrees(azimuthal);
+
 	}
-	return points;
+
+	//int rnd = 1;
+	//double offset = 2.0 / numPoints;
+	////why not use 2
+ //   //because y cannot be zero,y change from -1 to 1
+	//double increment = osg::PI * (3 - std::sqrt(3));
+	//for (int i = 0; i < numPoints; i++)
+	//{
+	//	double y = ((i * offset) - 1) + (offset / 2);
+	//	double r = std::sqrt(1 - std::pow(y , 2));
+	//	double phi = ((i + rnd) % numPoints) * increment;
+	//	double x = std::cos(phi) * r;
+	//	double z = std::sin(phi) * r;
+	//	direction[0] = osg::RadiansToDegrees(std::atan2(y, x));
+	//	direction[1] = osg::RadiansToDegrees(std::asin(z));
+	//	double j = 0;
+	//	while (j < 360)
+	//	{
+	//		direction[2] = j;
+	//		points.push_back(std::vector<double>(direction,direction+3));
+	//		j = j + 30;
+	//	}
+	//}
+	//return points;
 }
 
-std::vector<std::pair<double, double> > getRandomPoints(int numPoints)
+std::vector<std::vector<double> > getRandomPoints(int numPoints)
 {
-	std::vector<std::pair<double, double> > points;
-	double azimuth, elevation;
+	std::vector<std::vector<double> > points;
+	double direction[3];
 	srand((int)time(NULL));
 	//generate numPoints of distinguish Points
 	for(int i=0; i<numPoints; i++)
     	{
 	    	bool hasAngle = false;
-	    	azimuth = rand()%360;
-	    	elevation = rand()%360;
+	    	direction[0] = rand()%360;
+	    	direction[1] = rand()%360;
+			direction[3] = rand() % 360;
 	    	for(int j = 0; j < points.size(); ++j)
 	    	{
-	    		double angleA = points[j].first;
-	    		double angleE = points[j].second;
-
-	    		if(angleA == azimuth && elevation == angleE)
+	    		double angleA = points[j][0];
+	    		double angleE = points[j][1];
+				double angleY = points[j][2];
+	    		if(angleA == direction[0] && angleE == direction[1] &&angleY== direction[2])
 	    		{
 	    			hasAngle = true;
 	    			break;
@@ -57,7 +83,7 @@ std::vector<std::pair<double, double> > getRandomPoints(int numPoints)
 	    	}
 	    	else
 	    	{
-	    		points.push_back(std::make_pair(azimuth, elevation));
+	    		points.push_back(std::vector<double>(direction, direction+3));
 	    	}
     	}
 		
@@ -89,9 +115,26 @@ cv::Mat AddGuassianNoise(cv::Mat src)
 	cv::add(src, noise, dst);
 	return dst;
 }
-
-int main(int argc, char **argv)
+int main()
 {
+	using namespace std;
+	LabeledPose *pose = new LabeledPose;
+	string filename = "frog//frog.obj";
+	pose->setFilename(filename);
+	pose->setAzimuth(0);
+	pose->setElevation(0);
+	//important
+	RendererEngine *renderer = new RendererEngine(pose);
+	cv::Mat depth, color;
+	int viewSize = 300;
+	renderer->render(viewSize, viewSize, depth, color);
+	//imshow("d", depth);
+	//imshow("c", color);
+	return 0;
+}
+int debugmain(int argc, char **argv)
+{
+	using namespace std;
 	if (argc < 4) 
 	{
 		std::cerr << "Usage: renderer <MODE: 0 = DEPTH, 1 = RGB, 2 = RGBD, 3 = GRAYSCALE, 4 = gaussian noise> <INPUT_FILENAME> <OUTPUT_DIR> [NUMBER_OF_VIEWS][Random or not] [VIEW_SIZE]" << std::endl;
@@ -105,14 +148,14 @@ int main(int argc, char **argv)
 	int viewSize = argc > 6 ? atoi(argv[6]) : 64;
 	
 	#ifdef _WIN32
-		string filenameName = filename.substr(filename.find_last_of('\\') + 1);
+		std::string filenameName = filename.substr(filename.find_last_of('\\') + 1);
 	#else
 		string filenameName = filename.substr(filename.find_last_of('/') + 1);
 	#endif
 	boost::filesystem::create_directories(outputDir + "/" + filenameName);
 	
 	std::vector<std::pair<std::string, cv::Mat> > images;
-	 std::vector<std::pair<double, double> > points;
+	 std::vector<std::vector<double> > points;
 	if(bRandom)
 	{
 		points = getRandomPoints(numViews);
@@ -125,18 +168,19 @@ int main(int argc, char **argv)
 	pose->setFilename(filename);
 	//important
 	RendererEngine *renderer = new RendererEngine(pose);
-	for (std::vector<std::pair<double, double> >::iterator it = points.begin(); it != points.end(); ++it)
+	for (std::vector<std::vector<double> >::iterator it = points.begin(); it != points.end(); ++it)
 	{
 		
-		double azimuth = it->first;
-		double elevation = it->second;
+		double azimuth =(*it)[0];
+		double elevation=(*it)[1];
+		double yaw = (*it)[2];
 		pose->setAzimuth(azimuth);
 		pose->setElevation(elevation);
 		cout << "Reading " << filename << "; elevation=" << elevation << "; azimuth=" << azimuth << "..." << endl;
 		try 
 		{
 			cv::Mat depth, color;
-			renderer->render(viewSize, viewSize, depth, color, cv::Vec4b(0, 255, 0, 1));
+			renderer->render(viewSize, viewSize, depth, color);
 			std::stringstream ss;
 			ss << outputDir << "/" << filenameName << "/" << pose->getCameraDistance() << "_" << pose->getElevation() << "_" << pose->getAzimuth() << "_" << pose->getYaw() << ".png";
 			std::vector<cv::Mat> channels;

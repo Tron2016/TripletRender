@@ -1,4 +1,7 @@
-﻿renderer.obj : error LNK2019: unresolved external symbol "public: __cdecl LabeledPose::LabeledPose(void)" (??0LabeledPose@@QEAA@XZ) referenced in function main
-renderer.obj : error LNK2019: unresolved external symbol "public: __cdecl Renderer::Renderer(class LabeledPose *,bool)" (??0Renderer@@QEAA@PEAVLabeledPose@@_N@Z) referenced in function main
-renderer.obj : error LNK2019: unresolved external symbol "public: void __cdecl Renderer::render(int,int,class cv::Mat &,class cv::Mat &,class cv::Vec<unsigned char,4>,bool,double *,double *,double *,double *,bool,bool,double *,double *,double *,double,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,bool)" (?render@Renderer@@QEAAXHHAEAVMat@cv@@0V?$Vec@E$03@3@_NPEAN33322333NV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@2@Z) referenced in function main
-c:\users\hp sprout\documents\visual studio 2015\Projects\renderer\x64\Debug\renderer.exe : fatal error LNK1120: 3 unresolved externals
+﻿  RenderEngine.cpp
+c:\program files (x86)\microsoft sdks\windows\v7.1a\include\sal_supp.h(57): warning C4005: '__useHeader': macro redefinition
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\sal.h(2866): note: see previous definition of '__useHeader'
+c:\program files (x86)\microsoft sdks\windows\v7.1a\include\specstrings_supp.h(77): warning C4005: '__on_failure': macro redefinition
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\sal.h(2876): note: see previous definition of '__on_failure'
+  renderer.vcxproj -> C:\Users\HP Sprout\Desktop\renderer\TripletRender\x64\Debug\renderer.exe
+  renderer.vcxproj -> C:\Users\HP Sprout\Desktop\renderer\TripletRender\x64\Debug\renderer.pdb (Partial PDB)

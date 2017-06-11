@@ -85,7 +85,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>C:\Chuang Gan\Boost\boost_1_64_0\stage\lib;C:\Chuang Gan\OpenCV3\opencv\build\x64\vc14\lib;C:\Chuang Gan\OpenSceneGraph-3.4.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libboost_atomic-vc140-mt-gd-1_64.lib;libboost_chrono-vc140-mt-gd-1_64.lib;libboost_container-vc140-mt-gd-1_64.lib;libboost_context-vc140-mt-gd-1_64.lib;libboost_coroutine-vc140-mt-gd-1_64.lib;libboost_date_time-vc140-mt-gd-1_64.lib;libboost_exception-vc140-mt-gd-1_64.lib;libboost_filesystem-vc140-mt-gd-1_64.lib;libboost_graph-vc140-mt-gd-1_64.lib;libboost_iostreams-vc140-mt-gd-1_64.lib;libboost_locale-vc140-mt-gd-1_64.lib;libboost_log-vc140-mt-gd-1_64.lib;libboost_log_setup-vc140-mt-gd-1_64.lib;libboost_math_c99-vc140-mt-gd-1_64.lib;libboost_math_c99f-vc140-mt-gd-1_64.lib;libboost_math_c99l-vc140-mt-gd-1_64.lib;libboost_math_tr1-vc140-mt-gd-1_64.lib;libboost_math_tr1f-vc140-mt-gd-1_64.lib;libboost_math_tr1l-vc140-mt-gd-1_64.lib;libboost_prg_exec_monitor-vc140-mt-gd-1_64.lib;libboost_program_options-vc140-mt-gd-1_64.lib;libboost_random-vc140-mt-gd-1_64.lib;libboost_regex-vc140-mt-gd-1_64.lib;libboost_serialization-vc140-mt-gd-1_64.lib;libboost_signals-vc140-mt-gd-1_64.lib;libboost_system-vc140-mt-gd-1_64.lib;libboost_test_exec_monitor-vc140-mt-gd-1_64.lib;libboost_thread-vc140-mt-gd-1_64.lib;libboost_timer-vc140-mt-gd-1_64.lib;libboost_type_erasure-vc140-mt-gd-1_64.lib;libboost_unit_test_framework-vc140-mt-gd-1_64.lib;libboost_wave-vc140-mt-gd-1_64.lib;libboost_wserialization-vc140-mt-gd-1_64.lib;osgAnimationd.lib;osgd.lib;osgDBd.lib;osgFXd.lib;osgGAd.lib;osgManipulatord.lib;osgParticled.lib;osgPresentationd.lib;osgQtd.lib;osgShadowd.lib;osgSimd.lib;osgTerraind.lib;osgTextd.lib;osgUId.lib;osgUtild.lib;osgViewerd.lib;osgVolumed.lib;osgWidgetd.lib;opencv_world310d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libboost_atomic-vc140-mt-gd-1_64.lib;libboost_chrono-vc140-mt-gd-1_64.lib;libboost_container-vc140-mt-gd-1_64.lib;libboost_context-vc140-mt-gd-1_64.lib;libboost_coroutine-vc140-mt-gd-1_64.lib;libboost_date_time-vc140-mt-gd-1_64.lib;libboost_exception-vc140-mt-gd-1_64.lib;libboost_filesystem-vc140-mt-gd-1_64.lib;libboost_graph-vc140-mt-gd-1_64.lib;libboost_iostreams-vc140-mt-gd-1_64.lib;libboost_locale-vc140-mt-gd-1_64.lib;libboost_log-vc140-mt-gd-1_64.lib;libboost_log_setup-vc140-mt-gd-1_64.lib;libboost_math_c99-vc140-mt-gd-1_64.lib;libboost_math_c99f-vc140-mt-gd-1_64.lib;libboost_math_c99l-vc140-mt-gd-1_64.lib;libboost_math_tr1-vc140-mt-gd-1_64.lib;libboost_math_tr1f-vc140-mt-gd-1_64.lib;libboost_math_tr1l-vc140-mt-gd-1_64.lib;libboost_prg_exec_monitor-vc140-mt-gd-1_64.lib;libboost_program_options-vc140-mt-gd-1_64.lib;libboost_random-vc140-mt-gd-1_64.lib;libboost_regex-vc140-mt-gd-1_64.lib;libboost_serialization-vc140-mt-gd-1_64.lib;libboost_signals-vc140-mt-gd-1_64.lib;libboost_system-vc140-mt-gd-1_64.lib;libboost_test_exec_monitor-vc140-mt-gd-1_64.lib;libboost_thread-vc140-mt-gd-1_64.lib;libboost_timer-vc140-mt-gd-1_64.lib;libboost_type_erasure-vc140-mt-gd-1_64.lib;libboost_unit_test_framework-vc140-mt-gd-1_64.lib;libboost_wave-vc140-mt-gd-1_64.lib;libboost_wserialization-vc140-mt-gd-1_64.lib;OpenThreadsd.lib;osgAnimationd.lib;osgd.lib;osgDBd.lib;osgFXd.lib;osgGAd.lib;osgManipulatord.lib;osgParticled.lib;osgPresentationd.lib;osgQtd.lib;osgShadowd.lib;osgSimd.lib;osgTerraind.lib;osgTextd.lib;osgUId.lib;osgUtild.lib;osgViewerd.lib;osgVolumed.lib;osgWidgetd.lib;opencv_world310d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -115,25 +115,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="depth.h" />
-    <ClInclude Include="EngineOSG.h" />
     <ClInclude Include="labeled_pose.h" />
-    <ClInclude Include="ModelInfo.h" />
     <ClInclude Include="pose.h" />
     <ClInclude Include="RenderEngine.h" />
-    <ClInclude Include="renderer.h" />
-    <ClInclude Include="util.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="depth.cpp" />
-    <ClCompile Include="Engine.cpp" />
-    <ClCompile Include="EngineOSG.cpp" />
     <ClCompile Include="labeled_pose.cpp" />
     <ClCompile Include="pose.cpp" />
     <ClCompile Include="objrender.cpp" />
     <ClCompile Include="RenderEngine.cpp" />
-    <ClCompile Include="renderer.cpp" />
-    <ClCompile Include="util.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

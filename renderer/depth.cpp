@@ -2,7 +2,7 @@
 #include "util.h"
 #include <cstdlib>
 
-void getRenderedImage(GLubyte *image, int gWidth , int gHeight, GLubyte *imageOutput)
+void getRenderedImage(GLubyte *image, int gWidth , int gHeight, unsigned char *imageOutput)
 {
 	if (NULL == imageOutput) {
 		return;
